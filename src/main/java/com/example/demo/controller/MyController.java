@@ -32,7 +32,7 @@ public class MyController {
             return "/index";
         }
         model.addAttribute("user","anonymous");
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/login")
