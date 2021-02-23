@@ -29,7 +29,7 @@ public class MyController {
     public String getIndex(@AuthenticationPrincipal User user, Model model){
         if (user!=null){
             model.addAttribute("user", user.getUsername());
-            return "/index";
+            return "index";
         }
         model.addAttribute("user","anonymous");
         return "index";
