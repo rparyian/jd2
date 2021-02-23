@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<h3 class="center">Please, register</h3>
+
+<div class="container center">
+    <form  th:action="@{/registration}" method="post">
+        username: <input type="text" name="username"/>
+        password: <input type="text" name="password">
+        email: <input type="text" name="email">
+        <p><input type="submit" value="Register" class="btn btn-primary brown" /> <input type="reset" value="Reset"
+                                                                                      class="btn btn-primary red" /></p>
+    </form>
+</div>
+</body>
+</html>

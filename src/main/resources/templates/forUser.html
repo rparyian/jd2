@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+<head>
+    <meta charset="UTF-8">
+    <title>forUserPage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="/js/sc.js"></script>
+</head>
+<body>
+<h3 class="center">Users</h3>
+<form method="post" th:action="@{/delete}">
+    <input type="submit" value="Delete" th:formAction onclick="return confirm('Are you sure?')"/>
+        <input th:formaction="@{block}" type="submit" value="Block" onclick="return confirm('Are you sure?')"/>
+        <input th:formaction="@{unblock}" type="submit" value="Unblock" onclick="return confirm('Are you sure?')"/>
+<table class="centered">
+    <thead>
+    <tr>
+        <th>
+          <label th:for="checkBoxAll"> <input id="checkBoxAll" type="checkbox" onchange="toggleCheckBoxes()"  />
+              <span>Select all</span>
+          </label>
+        </th>
+        <th>ID</th>
+        <th>name</th>
+        <th>email</th>
+        <th>registrationDate</th>
+        <th>lastInDate</th>
+        <th>status</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user:${users}">
+            <td>
+                <label th:for="${user.id}">
+                    <input class ="chex" type="checkbox" th:id="${user.id}" th:value="${user.username}"  th:name="userName"/>
+                    <span></span>
+            </label>
+            </td>
+            <td th:text="${user.id}"/>
+            <td th:text="${user.username}"/>
+            <td th:text="${user.email}"/>
+            <td th:text="${user.registrationDate}"/>
+            <td th:text="${user.lastInDate}"/>
+            <td th:text="${user.status}"/>
+
+        </tr>
+    </tbody>
+</table>
+</form>
+<script>
+
+    function toggleCheckBoxes() {
+        const checkboxChecked = this.checked;
+        for (let checkbox of document.querySelectorAll('.chex'))
+            checkbox.checked = checkboxChecked
+    }
+
+    let checkBox = document.getElementById('checkBoxAll');
+    checkBox.addEventListener('change', toggleCheckBoxes);
+</script>
+</body>
+</html>

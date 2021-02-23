@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<p th:text="${user}"></p>
+<form th:if="${user}!='anonymous'" th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+</form>
+<h3 class="center">Index page</h3>
+<a th:href="@{/login}">Login page</a><br>
+<a th:href="@{/registration}">Registration page</a><br>
+<a th:href="@{/forUser}">forUser page</a><br>
+</body>
+</html>
