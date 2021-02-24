@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>forUserPage</title>
@@ -8,6 +8,10 @@
     <script src="/js/sc.js"></script>
 </head>
 <body>
+<p th:text="${user}"></p>
+<form th:if="${user}!='anonymous'" th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+</form>
 <h3 class="center">Users</h3>
 <form method="post" th:action="@{/delete}">
     <input type="submit" value="Delete" th:formAction onclick="return confirm('Are you sure?')"/>
