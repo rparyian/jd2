@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.SecurityConfig;
-import com.example.demo.config.SessionRegistryMyImpl;
 import com.example.demo.model.User;
 import com.example.demo.repo.UserRepo;
 import com.example.demo.service.MyUserDetailsService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.session.SessionInformation;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
