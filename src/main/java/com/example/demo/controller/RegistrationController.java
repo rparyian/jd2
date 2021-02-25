@@ -12,15 +12,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("registration")
 public class RegistrationController {
     private SecurityConfig securityConfig;
     private PasswordEncoder passwordEncoder;
@@ -33,11 +35,13 @@ public class RegistrationController {
     }
 
     @GetMapping
-    public String getRegistrationForm(){
+    public String getRegistrationForm(@ModelAttribute("personForm") RegistrationForm form){
         return "registration";
     }
     @PostMapping
-    public String saveNewUser(RegistrationForm form,@ModelAttribute("user") User user, HttpServletRequest request) throws Exception {
+    public String saveNewUser(@ModelAttribute("personForm") @Valid RegistrationForm form, BindingResult bindingResult, @ModelAttribute("user") User user, HttpServletRequest request) throws Exception {
+        if (bindingResult.hasErrors())
+            return "registration";
         userRepo.save(form.toUser(passwordEncoder));
         authenticateUserAndSetSession(user,request);
         return "redirect:/";

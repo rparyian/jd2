@@ -6,15 +6,23 @@
     <meta charset="UTF-8">
     <title>Registration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<style>
+    .validationError{
+        color: red;
+    }
+</style>
 </head>
 <body>
 <h3 class="center">Please, register</h3>
 
 <div class="container center">
-    <form  th:action="@{/registration}" method="post">
-        username: <input type="text" name="username"/>
-        password: <input type="text" name="password">
-        email: <input type="text" name="email">
+    <form  th:action="@{/registration}" th:object="${personForm}" method="post">
+        username: <input type="text" th:field="*{username}"/>
+        <td class="validationError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td><br>
+        password: <input type="text" th:field="*{password}">
+        <td class="validationError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td><br>
+        email: <input type="text" th:field="*{email}">
+        <td class="validationError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td><br>
         <p><input type="submit" value="Register" class="btn btn-primary brown" /> <input type="reset" value="Reset"
                                                                                       class="btn btn-primary red" /></p>
     </form>
