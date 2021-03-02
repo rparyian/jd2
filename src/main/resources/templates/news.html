@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<p th:text="${user}"></p>
+<form th:if="${user}!='anonymous'" th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+</form>
+<form  th:action="@{/addNews}" method="get">
+    <input type="submit" value="Add new">
+</form>
+<h3 class="center">MyPlainNews</h3>
+<table class="centered">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Brief</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="n : ${allNews}">
+        <td th:text="${n.title}"/>
+        <td th:text="${n.brief}"/>
+        <td> <form  th:action="@{'/'+${n.id}+'/show'}" method="get">
+            <p><input type="submit" value="Show" class="btn btn-primary green" /> </p>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

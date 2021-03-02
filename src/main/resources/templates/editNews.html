@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container center">
+    <form  action="#" th:action="@{'/'+${editNew.id}+'/edit'}" th:object="${editNew}" method="post">
+        <p>Title <input type="text" th:field="*{title}" /></p>
+        <p>Brief <input type="text" th:field="*{brief}" /></p>
+        <p>Content <textarea type="text" th:field="*{content}" /></p>
+        <p><input type="submit" value="Edit new" class="btn btn-primary brown" /> <input type="reset" value="Reset"
+                                                                                        class="btn btn-primary red" /></p>
+    </form>
+</div>
+</body>
+</html>

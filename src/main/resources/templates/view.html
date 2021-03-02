@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<table >
+    <thead>
+    <br>
+  <strong> <tr th:text="${n.title}" /></strong>
+    </thead>
+</table>
+<p th:text="${n.brief}" />
+<br>
+<p th:text="${n.content}" />
+<br>
+<p th:text="${n.dateOfCreation}" />
+<br>
+<a href="" th:href="@{/getNews}">Back</a>
+<form th:if="${flag}"  th:action="@{'/'+${n.id}+'/delete'}" method="post">
+    <input type="submit" value="Delete">
+</form>
+<form th:if="${flag}"  th:action="@{'/'+${n.id}+'/edit'}" method="get">
+    <input type="submit" value="Edit">
+</form>
+</body>
+</html>
