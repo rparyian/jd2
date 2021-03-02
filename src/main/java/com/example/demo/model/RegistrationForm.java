@@ -1,15 +1,18 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.var;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.HashSet;
 
 @Data
 public class RegistrationForm {
@@ -31,8 +34,8 @@ public class RegistrationForm {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setRoles(Collections.singleton(Role.USER));
-        user.setRegistrationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        user.setLastInDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        user.setRegistrationDate(Timestamp.valueOf(LocalDateTime.now()));
+        user.setLastInDate(Timestamp.valueOf(LocalDateTime.now()));
         user.setStatus("unblocked");
         return user;
     }

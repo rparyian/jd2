@@ -6,15 +6,36 @@
     <title>forUserPage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="/js/sc.js"></script>
+    <style>
+        .rightContainer{
+            right: auto;
+        }
+    </style>
 </head>
 <body>
 <p th:text="${user}"></p>
 <form th:if="${user}!='anonymous'" th:action="@{/logout}" method="post">
     <input type="submit" value="logout">
 </form>
+<div class="rightContainer">
+    <form th:action="@{'forUser?local=ru'}" method="get">
+        <input type="hidden" name="local" value="ru" />
+
+        <input type="submit"
+               th:value="#{locbutton.name.ru}" /><br />
+    </form>
+    <form th:action="@{'forUser?local=en'}"  method="get">
+        <input type="hidden" name="local" value="en" /> <input type="submit"
+                                                               th:value="#{locbutton.name.en}" /><br />
+    </form>
+    <form th:action="@{'forUser?local=it'}"  method="get">
+        <input type="hidden" name="local" value="it" /> <input type="submit"
+                                                               th:value="#{locbutton.name.it}" /><br />
+    </form>
+</div>
 <h3 class="center">Users</h3>
 <form method="post" th:action="@{/delete}">
-    <input type="submit" value="Delete" th:formAction onclick="return confirm('Are you sure?')"/>
+    <input type="submit" th:value="#{delete}" th:formAction onclick="return confirm('Are you sure?')"/>
         <input th:formaction="@{block}" type="submit" value="Block" onclick="return confirm('Are you sure?')"/>
         <input th:formaction="@{unblock}" type="submit" value="Unblock" onclick="return confirm('Are you sure?')"/>
 <table class="centered">

@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,8 +21,8 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
-    private String registrationDate;
-    private String lastInDate;
+    private Timestamp registrationDate;
+    private Timestamp lastInDate;
     private String status;
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -37,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     public void changeLastInTime(User user){
-        user.setLastInDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        user.setLastInDate(Timestamp.valueOf(LocalDateTime.now()));
         userRepo.saveAndFlush(user);
         System.out.println(user.getLastInDate());
     }

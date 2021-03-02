@@ -4,6 +4,7 @@ import com.example.demo.config.SecurityConfig;
 import com.example.demo.model.User;
 import com.example.demo.repo.UserRepo;
 import com.example.demo.service.MyUserDetailsService;
+import com.example.demo.service.NewsService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,7 +12,6 @@ import org.springframework.security.core.session.SessionInformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,24 +22,29 @@ import java.util.List;
 
 @Controller
 public class MyController {
+
     private UserRepo userRepo;
     private SecurityConfig securityConfig;
     private MyUserDetailsService myUserDetailsService;
+    private NewsService newsService;
 
-    public MyController(SecurityConfig securityConfig, UserRepo userRepo, MyUserDetailsService myUserDetailsService) {
+    public MyController(SecurityConfig securityConfig,UserRepo userRepo,
+                        MyUserDetailsService myUserDetailsService,NewsService newsService) {
         this.userRepo = userRepo;
         this.myUserDetailsService=myUserDetailsService;
         this.securityConfig=securityConfig;
+        this.newsService=newsService;
     }
 
+
     @RequestMapping("/")
-    public String getIndex(@AuthenticationPrincipal User user, Model model){
+    public String getIndex(@AuthenticationPrincipal User user, Model model,HttpServletRequest request){
         if (user!=null){
-            model.addAttribute("users",userRepo.findAll());
-            model.addAttribute("user", user.getUsername());
-            return "forUser";
+            model.addAttribute("allNews",newsService.getAllNews());
+            return "news";
         }
         model.addAttribute("user","anonymous");
+        model.addAttribute("allNews",newsService.getAllNews());
         return "login";
     }
 
